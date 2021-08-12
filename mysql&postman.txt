@@ -1,0 +1,171 @@
+--Some warnings--
+1. Make sure you download MYSQL Workbench properly so that the connection works. I used this video --> https://www.youtube.com/watch?v=qNi4s459_S8&t=238s
+
+2. For mysql connection to work, make sure you give the same username and password you made for mysql workbench. It did not work for my company laptop in anyother way.
+for example, mysql username & password --> root & apple
+So in application.properties -->
+spring.datasource.username = root
+spring.datasource.password = apple
+
+3. I made a helloworld() getmapping to check if crud was working.
+
+------begin-------
+
+In MySQL Workbench the commands I used:
+
+create database productsql;
+use productsql;
+select * from productsql.product;
+
+The output changed according to how I made changes in postman with each refresh.
+
+************************************************
+
+In postman,
+
+1.POST
+
+1.1 http://localhost:8080/addProduct
+Body: 
+{
+        "name": "Spoon",
+        "quantity": 5,
+        "price": 100.5
+    }
+
+1.2 http://localhost:8080/addProducts
+Body:
+[
+    {
+        "id": 2,
+        "name": "Tea",
+        "quantity": 1,
+        "price": 200.0
+    },
+    {
+        "id": 3,
+        "name": "Fan",
+        "quantity": 1,
+        "price": 6000
+    },
+    {
+        "id": 4,
+        "name": "Cup",
+        "quantity": 2,
+        "price": 600.0
+    },
+    {
+        "id": 5,
+        "name": "Shoe",
+        "quantity": 1,
+        "price": 1000.0
+    },
+    {
+        "id": 6,
+        "name": "Notebook",
+        "quantity": 5,
+        "price": 225.0
+    }
+]
+--------------------------------------------------
+2.GET
+
+2.1 http://localhost:8080/product/2
+Output:
+    {
+        "id": 2,
+        "name": "Tea",
+        "quantity": 1,
+        "price": 200.0
+    }
+
+2.2 http://localhost:8080/products
+Output:
+[
+    {
+        "id": 1,
+        "name": "Spoon",
+        "quantity": 5,
+        "price": 100.5
+    },
+    {
+        "id": 2,
+        "name": "Tea",
+        "quantity": 1,
+        "price": 200.0
+    },
+    {
+        "id": 3,
+        "name": "Fan",
+        "quantity": 1,
+        "price": 6000
+    },
+    {
+        "id": 4,
+        "name": "Cup",
+        "quantity": 2,
+        "price": 600.0
+    },
+    {
+        "id": 5,
+        "name": "Shoe",
+        "quantity": 1,
+        "price": 1000.0
+    },
+    {
+        "id": 6,
+        "name": "Notebook",
+        "quantity": 5,
+        "price": 225.0
+    }
+]
+--------------------------------------------------
+3. DELETE
+
+3.1 http://localhost:8080/product/3
+Output:
+[
+    {
+        "id": 1,
+        "name": "Spoon",
+        "quantity": 5,
+        "price": 100.5
+    },
+    {
+        "id": 2,
+        "name": "Tea",
+        "quantity": 1,
+        "price": 200.0
+    },
+    {
+        "id": 4,
+        "name": "Cup",
+        "quantity": 2,
+        "price": 600.0
+    },
+    {
+        "id": 5,
+        "name": "Shoe",
+        "quantity": 1,
+        "price": 1000.0
+    },
+    {
+        "id": 6,
+        "name": "Notebook",
+        "quantity": 5,
+        "price": 225.0
+    }
+]
+
+Output:Product deleted: 3
+--------------------------------------------------
+4. PUT
+4.1 http://localhost:8080/product
+Body:
+    {
+        "id": 2,
+        "name": "Coffee",
+        "quantity": 1,
+        "price": 200.0
+    }
+****************************************************
